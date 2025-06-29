@@ -1,12 +1,20 @@
-import axios, { type AxiosInstance } from "axios";
+import axios, { type AxiosInstance } from 'axios'
 
-export const API_KEY = import.meta.env.VITE_API_KEY;
+export const API_KEY = import.meta.env.VITE_API_KEY
 
-const httpClient: AxiosInstance = axios.create({
-  baseURL: "https://api.themoviedb.org/3/",
+export const apiBaseUrl = 'https://api.themoviedb.org/3/'
+export const imageBaseUrl = 'https://image.tmdb.org/t/p/original/'
+
+export const baseHttpClient: AxiosInstance = axios.create({
+  baseURL: apiBaseUrl,
   headers: {
-    "Content-type": "application/json",
+    'Content-type': 'application/json',
   },
-});
+})
 
-export default httpClient;
+export const imageHttpClient: AxiosInstance = axios.create({
+  baseURL: imageBaseUrl,
+  headers: {
+    'Content-type': 'application/json',
+  },
+})

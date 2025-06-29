@@ -9,14 +9,16 @@
 </template>
 
 <script setup lang="ts">
-  import { ref, computed } from 'vue'
+  import { computed, ref } from 'vue'
   import { RouterView } from 'vue-router'
-  import AppHeader from './ui/AppHeader.vue'
+  import AppHeader from './ui/AppHeader/AppHeader.vue'
 
-  const isDark = ref(false)
+  const isDark = ref(true)
   const themeClass = computed(() => (isDark.value ? 'my-app-dark' : 'my-app-light'))
 
   function toggleTheme() {
     isDark.value = !isDark.value
   }
 </script>
+
+<!-- TODO: lazy loading -->
