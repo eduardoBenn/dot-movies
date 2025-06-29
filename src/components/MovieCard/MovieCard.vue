@@ -37,6 +37,7 @@
     <div class="mb-2 font-semibold text-gray-800">R${{ movie.price }}</div>
 
     <button
+      @click="addToShoppingCartItem"
       class="mt-auto w-full cursor-pointer rounded bg-green-500 py-2 font-bold text-white hover:bg-green-600"
     >
       Adicionar
@@ -50,7 +51,7 @@
   import { imageBaseUrl } from '@/services'
   import MoviesService from '@/services/MoviesService'
   import { useStore } from '@/store'
-  import { ADD_FAVORITES } from '@/store/mutationTypes'
+  import { ADD_FAVORITES, SET_SHOPPING_CART_ITEMS } from '@/store/mutationTypes'
   import { HeartIcon, StarIcon } from '@heroicons/vue/16/solid'
   import { computed, defineComponent, ref } from 'vue'
 
@@ -89,6 +90,10 @@
         store.commit(ADD_FAVORITES, props.movieProp)
       }
 
+      const addToShoppingCartItem = () => {
+        store.commit(SET_SHOPPING_CART_ITEMS, props.movieProp)
+      }
+
       const isFavorite = computed(() => {
         const favorites = store.getters.allFavorites
         return favorites.some((favorite: IFavorite) => favorite.id === props.movieProp.id)
@@ -99,6 +104,7 @@
         imagePath,
         movieGenres,
         addToFavorites,
+        addToShoppingCartItem,
         isFavorite,
       }
     },

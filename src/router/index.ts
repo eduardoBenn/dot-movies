@@ -1,5 +1,6 @@
 import AppHome from '@/components/AppHome.vue'
 import Favorites from '@/views/FavoritesView.vue'
+import Shopping from '@/views/ShoppingView.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
 const router = createRouter({
@@ -14,6 +15,11 @@ const router = createRouter({
       path: '/favorites',
       name: 'favorites',
       component: Favorites,
+    },
+    {
+      path: '/shopping',
+      name: 'shopping',
+      component: Shopping,
     },
   ],
 })

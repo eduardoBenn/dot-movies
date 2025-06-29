@@ -11,7 +11,6 @@ export const favorite = {
   },
   mutations: {
     [ADD_FAVORITES](state, favorite: IFavorite) {
-      console.log(favorite)
       state.favorites.push(favorite)
     },
   },

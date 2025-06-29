@@ -1,6 +1,6 @@
 <template>
   <header class="flex items-center justify-between bg-teal-700 px-6 py-4 text-cyan-50">
-    <div @click="goToHome">Home</div>
+    <div @click="goToHome" class="cursor-pointer">Home</div>
     <div>
       <IconField>
         <InputIcon class="pi pi-search" />
@@ -13,10 +13,10 @@
     </div>
     <div class="flex items-center gap-8">
       <div class="flex items-center">
-        <ShoppingCartIcon class="w-6" />
+        <ShoppingCartIcon class="w-6 cursor-pointer" @click="goToShoppingCart" />
       </div>
       <div class="flex items-center">
-        <HeartIcon class="w-6" @click="goToFavorites" />
+        <HeartIcon class="w-6 cursor-pointer" @click="goToFavorites" />
       </div>
       <div class="flex items-center gap-1">
         <MoonIcon v-if="isDark" class="w-5" />
@@ -69,6 +69,10 @@
         router.push('/favorites')
       }
 
+      const goToShoppingCart = () => {
+        router.push('/shopping')
+      }
+
       const goToHome = () => {
         router.push('/')
       }
@@ -80,6 +84,7 @@
         themeLight,
         toggleTheme,
         goToFavorites,
+        goToShoppingCart,
         goToHome,
       }
     },
