@@ -1,6 +1,5 @@
 <template>
   <div class="relative flex w-64 flex-col items-center rounded-lg bg-gray-100 p-4 shadow-md">
-    <div id="aaaaa">aaaa</div>
     <button class="absolute top-3 right-3 text-gray-400 hover:text-red-400">
       <!-- <IconHeart /> -->
     </button>
@@ -24,14 +23,19 @@
     >
       Adicionar
     </button>
+
+    <li v-for="genre in movieGenres" :key="genre.id" class="rounded bg-gray-200 px-2 py-1">
+      {{ genre.name }}
+    </li>
   </div>
 </template>
 
 <script lang="ts">
-  import type { IMovie } from '@/interfaces/Imovie'
+  import type { IGenre, IMovie } from '@/interfaces/Imovie'
   import { imageBaseUrl } from '@/services'
   import MoviesService from '@/services/MoviesService'
-  import { defineComponent, ref } from 'vue'
+  import { useStore } from '@/store'
+  import { computed, defineComponent, ref } from 'vue'
 
   export default defineComponent({
     name: 'MovieCard',
@@ -42,6 +46,7 @@
       },
     },
     setup(props) {
+      const store = useStore()
       const imagePath = ref<string>('')
 
       MoviesService.getMoviesImages(props.movieProp.id)
@@ -54,9 +59,15 @@
           console.error('Error fetching movie image:', error)
         })
 
+      const movieGenres = computed(() => {
+        const allGenres = store.getters.allGenres
+        return allGenres.filter((genre: IGenre) => props.movieProp.genre_ids?.includes(genre.id))
+      })
+
       return {
         movie: props.movieProp,
         imagePath,
+        movieGenres,
       }
     },
   })

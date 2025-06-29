@@ -18,7 +18,7 @@ export const genre = {
   actions: {
     [GET_GENRES]({ commit }) {
       return MoviesService.getMoviesGenres().then((response) => {
-        commit(SET_GENRES, response)
+        commit(SET_GENRES, response.genres)
       })
     },
   },

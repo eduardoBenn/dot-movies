@@ -19,8 +19,8 @@
     },
     setup() {
       const store = useStore()
-      store.dispatch(GET_MOVIES)
       store.dispatch(GET_GENRES)
+      store.dispatch(GET_MOVIES)
 
       return {
         movies: computed(() => store.getters.allMovies),
