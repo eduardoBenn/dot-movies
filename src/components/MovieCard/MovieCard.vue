@@ -9,9 +9,7 @@
       />
     </button>
 
-    <div
-      class="mt-2 mb-2 flex h-20 h-32 w-20 w-32 items-center justify-center rounded-md bg-gray-300"
-    >
+    <div class="mt-2 mb-2 flex h-20 h-32 items-center justify-center rounded-md bg-gray-300">
       <img
         :src="imagePath"
         :alt="movie.title"
@@ -26,7 +24,7 @@
     <div class="mb-1 text-center text-lg font-bold text-black">{{ movie.title }}</div>
 
     <div class="mb-2 flex items-center gap-2">
-      <StarIcon class="h-5 w-5 text-yellow-500" about="teste" />
+      <StarIcon class="h-5 w-5 text-yellow-500" />
       <span class="font-bold text-gray-700">{{ String(movie.vote_average).substring(0, 3) }}</span>
     </div>
 

@@ -1,6 +1,6 @@
 <template>
   <header class="flex items-center justify-between bg-teal-700 px-6 py-4 text-cyan-50">
-    <div>logo</div>
+    <div @click="goToHome">Home</div>
     <div>
       <IconField>
         <InputIcon class="pi pi-search" />
@@ -16,7 +16,7 @@
         <ShoppingCartIcon class="w-6" />
       </div>
       <div class="flex items-center">
-        <HeartIcon class="w-6" />
+        <HeartIcon class="w-6" @click="goToFavorites" />
       </div>
       <div class="flex items-center gap-1">
         <MoonIcon v-if="isDark" class="w-5" />
@@ -36,6 +36,7 @@
   import { HeartIcon, MoonIcon, ShoppingCartIcon, SunIcon } from '@heroicons/vue/16/solid'
   import { Drawer, IconField, InputIcon, InputText, ToggleSwitch } from 'primevue'
   import { defineComponent, ref } from 'vue'
+  import { useRouter } from 'vue-router'
 
   export default defineComponent({
     name: 'AppHeader',
@@ -62,6 +63,15 @@
       const favoritesVisible = ref(false)
       const themeLight = ref(!props.isDark)
       const toggleTheme = () => emit('toggle-theme')
+      const router = useRouter()
+
+      const goToFavorites = () => {
+        router.push('/favorites')
+      }
+
+      const goToHome = () => {
+        router.push('/')
+      }
 
       return {
         search,
@@ -69,6 +79,8 @@
         favoritesVisible,
         themeLight,
         toggleTheme,
+        goToFavorites,
+        goToHome,
       }
     },
   })
