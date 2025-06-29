@@ -5,6 +5,7 @@ export interface IMovie {
   vote_average: number
   genre_ids: number[]
   poster_path: string
+  price?: string
 }
 
 export interface IGenre {

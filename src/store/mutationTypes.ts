@@ -5,3 +5,7 @@ export const SET_MOVIE_IMAGES = 'SET_MOVIE_IMAGES'
 export const GET_MOVIES = 'GET_MOVIES'
 export const GET_GENRES = 'GET_GENRES'
 export const GET_MOVIE_IMAGES = 'GET_MOVIE_IMAGES'
+
+export const SET_CART_VISIBLE = 'SET_CART_VISIBLE'
+
+export const ADD_FAVORITES = 'SET_FAVORITES'

@@ -27,11 +27,6 @@
   </header>
 
   <!-- mover p/ component separado -->
-  <Drawer v-model:visible="cartVisible" header="Right Drawer" position="right">
-    <p>carrinho</p>
-  </Drawer>
-
-  <!-- mover p/ component separado -->
   <Drawer v-model:visible="favoritesVisible" header="Right Drawer" position="right">
     <p>favoritos</p>
   </Drawer>

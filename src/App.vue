@@ -11,7 +11,7 @@
 <script setup lang="ts">
   import { computed, ref } from 'vue'
   import { RouterView } from 'vue-router'
-  import AppHeader from './ui/AppHeader/AppHeader.vue'
+  import AppHeader from './components/AppHeader/AppHeader.vue'
 
   const isDark = ref(true)
   const themeClass = computed(() => (isDark.value ? 'my-app-dark' : 'my-app-light'))
@@ -20,5 +20,3 @@
     isDark.value = !isDark.value
   }
 </script>
-
-<!-- TODO: lazy loading -->
