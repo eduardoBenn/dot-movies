@@ -16,7 +16,7 @@
         <ShoppingCartIcon class="w-6 cursor-pointer" @click="goToShoppingCart" />
       </div>
       <div class="flex items-center">
-        <HeartIcon class="w-6 cursor-pointer" @click="goToFavorites" />
+        <HeartIcon class="w-6 cursor-pointer" @click="toggleFavoritesDrawer" />
       </div>
       <div class="flex items-center gap-1">
         <MoonIcon v-if="isDark" class="w-5" />
@@ -26,9 +26,12 @@
     </div>
   </header>
 
-  <!-- mover p/ component separado -->
-  <Drawer v-model:visible="favoritesVisible" header="Right Drawer" position="right">
+  <Drawer v-model:visible="favoritesVisible" header="Favoritos" position="right">
     <p>favoritos</p>
+  </Drawer>
+
+  <Drawer v-model:visible="cartVisible" header="Meu carrinho" position="right">
+    <ShoppingCart v-if="cartVisible" />
   </Drawer>
 </template>
 
@@ -37,6 +40,7 @@
   import { Drawer, IconField, InputIcon, InputText, ToggleSwitch } from 'primevue'
   import { defineComponent, ref } from 'vue'
   import { useRouter } from 'vue-router'
+  import ShoppingCart from '../ShoppingCart/ShoppingCart.vue'
 
   export default defineComponent({
     name: 'AppHeader',
@@ -46,6 +50,7 @@
       InputText,
       ToggleSwitch,
       ShoppingCartIcon,
+      ShoppingCart,
       HeartIcon,
       SunIcon,
       MoonIcon,
@@ -65,12 +70,12 @@
       const toggleTheme = () => emit('toggle-theme')
       const router = useRouter()
 
-      const goToFavorites = () => {
-        router.push('/favorites')
+      const toggleFavoritesDrawer = () => {
+        favoritesVisible.value = !favoritesVisible.value
       }
 
-      const goToShoppingCart = () => {
-        router.push('/shopping')
+      const toggleShoppingCart = () => {
+        cartVisible.value = !cartVisible.value
       }
 
       const goToHome = () => {
@@ -83,8 +88,8 @@
         favoritesVisible,
         themeLight,
         toggleTheme,
-        goToFavorites,
-        goToShoppingCart,
+        toggleFavoritesDrawer,
+        goToShoppingCart: toggleShoppingCart,
         goToHome,
       }
     },

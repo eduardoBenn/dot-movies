@@ -1,6 +1,6 @@
 <template>
   <section
-    class="group relative flex w-64 flex-col items-center rounded-lg bg-gray-100 p-4 shadow-md"
+    class="group relative flex w-64 flex-col items-center rounded-lg bg-gray-200 p-4 shadow-md"
   >
     <button @click="addToFavorites" class="absolute top-3 right-3 text-gray-400 hover:text-red-400">
       <HeartIcon

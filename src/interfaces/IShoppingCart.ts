@@ -1,3 +1,3 @@
-export interface IShoppingCart {
-  visible: boolean
-}
+import type { IMovie } from './Imovie'
+
+export type IShoppingCart = IMovie

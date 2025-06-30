@@ -6,7 +6,6 @@
     >
       <MovieCard v-for="movie in movies" :key="movie.id" :movieProp="movie" />
     </div>
-    <ShoppingCart :is-visible="false" />
   </div>
 </template>
 
@@ -15,13 +14,11 @@
   import { useStore } from '@/store'
   import { GET_GENRES, GET_MOVIES } from '@/store/mutationTypes'
   import { computed, defineComponent } from 'vue'
-  import ShoppingCart from './ShoppingCart/ShoppingCart.vue'
 
   export default defineComponent({
     name: 'AppHome',
     components: {
       MovieCard,
-      ShoppingCart,
     },
     setup() {
       const store = useStore()
