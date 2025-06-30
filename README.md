@@ -78,6 +78,6 @@ npm run preview
 - [ ] Cobertura dos requisitos com E2E
 - [ ] Configuração .env file
 - [ ] CI/CD com esteira para Github Actions
-- [ ] Adição do Docker e hospedagem AWS S3
+- [ ] Adição do Docker e hospedagem cloud
 
 > Projeto feito com [Vue 3](https://vuejs.org/), [Vuex](https://vuex.vuejs.org/), [PrimeVue](https://primevue.org/), [TailwindCSS](https://tailwindcss.com/) e [Vite](https://vitejs.dev/).
