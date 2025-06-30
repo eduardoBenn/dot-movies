@@ -1,4 +1,6 @@
 <template>
+  <Toast />
+
   <section
     class="group relative flex w-64 flex-col items-center rounded-lg bg-gray-200 p-4 shadow-md"
   >
@@ -53,6 +55,8 @@
   import { useStore } from '@/store'
   import { ADD_FAVORITES, SET_SHOPPING_CART_ITEMS } from '@/store/mutationTypes'
   import { HeartIcon, StarIcon } from '@heroicons/vue/16/solid'
+  import { Toast, useToast } from 'primevue'
+  // import { useToast } from 'primevue'
   import { computed, defineComponent, ref } from 'vue'
 
   export default defineComponent({
@@ -60,6 +64,7 @@
     components: {
       StarIcon,
       HeartIcon,
+      Toast,
     },
     props: {
       movieProp: {
@@ -70,6 +75,7 @@
     setup(props) {
       const store = useStore()
       const imagePath = ref<string>('')
+      const toast = useToast()
 
       MoviesService.getMoviesImages(props.movieProp.id)
         .then((image) => {
@@ -91,6 +97,12 @@
       }
 
       const addToShoppingCartItem = () => {
+        toast.add({
+          severity: 'success',
+          summary: 'Success',
+          detail: 'Adicionado com sucesso!',
+          life: 3000,
+        })
         store.commit(SET_SHOPPING_CART_ITEMS, props.movieProp)
       }
 

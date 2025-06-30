@@ -75,10 +75,14 @@
     </div>
 
     <div class="w-full rounded-lg bg-gray-200 p-6 shadow md:w-96 dark:bg-gray-600">
-      <div class="mt-4 grid grid-cols-5 items-center gap-4 border-t pt-4">
-        <span class="col-span-2 font-medium">Nome do Filme</span>
-        <span>1</span>
-        <span>R$ 9,99</span>
+      <div
+        class="mt-4 grid grid-cols-5 items-center gap-4 border-t pt-4"
+        v-for="(item, index) in shoppingCartItems"
+        :key="index"
+      >
+        <span class="col-span-2 font-medium">{{ item.title }}</span>
+        <span>{{ index + 1 }}</span>
+        <span>R$ {{ item.price }}</span>
         <button>
           <TrashIcon class="h-5 w-5 cursor-pointer text-gray-400 hover:text-red-500" />
         </button>
@@ -86,7 +90,7 @@
 
       <div class="mt-6 flex items-center justify-between">
         <span class="font-medium">Total:</span>
-        <span class="text-xl font-bold">R$ 19,98</span>
+        <span class="text-xl font-bold">R$ {{ totalPrice }}</span>
       </div>
 
       <button
@@ -145,6 +149,7 @@
 
       return {
         shoppingCartItems: computed(() => store.getters.allShoppingCartItems),
+        totalPrice: computed(() => store.getters.totalPrice),
         name,
         nameError,
         email,
