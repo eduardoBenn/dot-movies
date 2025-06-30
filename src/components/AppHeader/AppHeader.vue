@@ -7,6 +7,7 @@
         <InputText
           v-model="search"
           placeholder="Search"
+          disabled
           class="!bg-white !text-black dark:!bg-gray-800 dark:!text-white"
         />
       </IconField>
