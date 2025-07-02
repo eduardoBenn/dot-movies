@@ -2,7 +2,11 @@
   <div class="top-0 right-0 flex h-full w-70 flex-col">
     <header class="flex items-center justify-between border-b px-1 py-3">
       <h2 class="text-lg font-semibold">Itens no carrinho</h2>
-      <button class="text-sm text-blue-500 hover:underline" @click="clearShoppingItems">
+      <button
+        data-testid="clear-items-button"
+        class="text-sm text-blue-500 hover:underline"
+        @click="clearShoppingItems"
+      >
         Esvaziar
       </button>
     </header>
@@ -12,6 +16,7 @@
         class="mb-4 flex items-center justify-between"
         v-for="(item, index) in shoppingCartItems"
         :key="index"
+        data-testid="cart-item"
       >
         <div class="flex items-center space-x-3">
           <div>
@@ -34,6 +39,7 @@
       <button
         class="w-full cursor-pointer rounded-lg bg-green-600 py-3 font-medium text-white transition hover:bg-green-700"
         v-on:click="goToShopping"
+        data-testid="finish-purchase"
       >
         Finalizar compra
       </button>
