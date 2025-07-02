@@ -4,9 +4,14 @@
   <section
     class="group relative flex w-64 flex-col items-center rounded-lg bg-gray-200 p-4 shadow-md"
   >
-    <button @click="addToFavorites" class="absolute top-3 right-3 text-gray-400 hover:text-red-400">
+    <button
+      @click="addToFavorites"
+      class="absolute top-3 right-3 text-gray-400"
+      data-testid="add-favorites"
+    >
       <HeartIcon
-        class="h-5 w-5 cursor-pointer"
+        name="HeartIcon"
+        class="h-5 w-5 cursor-pointer hover:text-red-400"
         :class="isFavorite ? 'text-red-500' : 'text-red-200'"
       />
     </button>
@@ -31,7 +36,12 @@
     </div>
 
     <div class="mb-2 flex flex-row gap-2">
-      <span v-for="genre in movieGenres.slice(0, 3)" :key="genre.id" class="text-[12px] text-black">
+      <span
+        v-for="genre in movieGenres.slice(0, 3)"
+        :key="genre.id"
+        data-testid="movie-genre"
+        class="text-[12px] text-black"
+      >
         {{ genre.name }}
       </span>
     </div>
