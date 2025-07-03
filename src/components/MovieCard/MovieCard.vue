@@ -46,7 +46,7 @@
       </span>
     </div>
 
-    <div class="mb-2 font-semibold text-gray-800">R${{ movie.price }}</div>
+    <div class="mb-2 font-semibold text-gray-800">{{ formatToCurrencyMoney(movie.price) }}</div>
 
     <button
       @click="addToShoppingCartItem"
@@ -64,6 +64,7 @@
   import MoviesService from '@/services/MoviesService'
   import { useStore } from '@/store'
   import { ADD_FAVORITES, SET_SHOPPING_CART_ITEMS } from '@/store/mutationTypes'
+  import { formatToCurrencyMoney } from '@/utils/formater.util'
   import { HeartIcon, StarIcon } from '@heroicons/vue/16/solid'
   import { Toast, useToast } from 'primevue'
   // import { useToast } from 'primevue'
@@ -128,6 +129,7 @@
         addToFavorites,
         addToShoppingCartItem,
         isFavorite,
+        formatToCurrencyMoney,
       }
     },
   })

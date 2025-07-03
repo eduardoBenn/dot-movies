@@ -30,6 +30,6 @@ export const shoppingCart = {
       return state.shoppingCartItems
     },
     totalPrice: (state: ShoppingCartState): number =>
-      state.shoppingCartItems.reduce((sum, item) => sum + (item.price || 0), 0),
+      state.shoppingCartItems.reduce((sum, item) => sum + (Number(item.price) || 0), 0),
   },
 }

@@ -1,4 +1,3 @@
-import { GET_GENRES, GET_MOVIES } from '@/store/mutationTypes'
 import { mount } from '@vue/test-utils'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import AppHome from './AppHome.vue'
@@ -20,8 +19,8 @@ vi.mock('@/store', () => ({
 }))
 
 vi.mock('@/store/mutationTypes', () => ({
-  GET_GENRES: GET_GENRES,
-  GET_MOVIES: GET_MOVIES,
+  GET_GENRES: 'GET_GENRES',
+  GET_MOVIES: 'GET_MOVIES',
 }))
 
 describe('AppHome.vue', () => {
@@ -31,15 +30,15 @@ describe('AppHome.vue', () => {
 
   it('it should dispatch action and genres on mount', () => {
     mount(AppHome)
-    expect(dispatch).toHaveBeenCalledWith(GET_GENRES)
-    expect(dispatch).toHaveBeenCalledWith(GET_MOVIES)
+    expect(dispatch).toHaveBeenCalledWith('GET_GENRES')
+    expect(dispatch).toHaveBeenCalledWith('GET_MOVIES')
   })
 
-  it.each(mockMovies)('should build a MovieCard for each movie', ({ title }) => {
+  it('should build a MovieCard for each movie', () => {
     const wrapper = mount(AppHome)
     const cards = wrapper.findAll('.movie-card')
     expect(cards.length).toBe(mockMovies.length)
-    expect(cards[0].text()).toContain({ title })
-    expect(cards[1].text()).toContain({ title })
+    expect(cards[0].text()).toContain(mockMovies[0].title)
+    expect(cards[1].text()).toContain(mockMovies[1].title)
   })
 })
