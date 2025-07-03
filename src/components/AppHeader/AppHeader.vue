@@ -26,22 +26,19 @@
       </div>
     </div>
   </header>
-
-  <Drawer v-model:visible="favoritesVisible" header="Favoritos" position="right">
-    <p>favoritos</p>
-  </Drawer>
-
-  <Drawer v-model:visible="cartVisible" header="Meu carrinho" position="right">
-    <ShoppingCart v-if="cartVisible" />
-  </Drawer>
+  <!-- TODO: move to a higher component and keep header as simple as possible.
+  also, control the visibility by store  -->
+  <FavoritesDrawer :favoritesVisible="favoritesVisible" />
+  <ShoppingCartDrawer :shoppingCartVisible="shoppingCartVisible" />
 </template>
 
 <script lang="ts">
   import { HeartIcon, MoonIcon, ShoppingCartIcon, SunIcon } from '@heroicons/vue/16/solid'
-  import { Drawer, IconField, InputIcon, InputText, ToggleSwitch } from 'primevue'
+  import { IconField, InputIcon, InputText, ToggleSwitch } from 'primevue'
   import { defineComponent, ref } from 'vue'
   import { useRouter } from 'vue-router'
-  import ShoppingCart from '../ShoppingCart/ShoppingCart.vue'
+  import FavoritesDrawer from '../FavoritesDrawer/FavoritesDrawer.vue'
+  import ShoppingCartDrawer from '../ShoppingCartDrawer/ShoppingCartDrawer.vue'
 
   export default defineComponent({
     name: 'AppHeader',
@@ -51,11 +48,11 @@
       InputText,
       ToggleSwitch,
       ShoppingCartIcon,
-      ShoppingCart,
       HeartIcon,
       SunIcon,
       MoonIcon,
-      Drawer,
+      FavoritesDrawer,
+      ShoppingCartDrawer,
     },
     props: {
       isDark: {
@@ -63,9 +60,10 @@
         required: true,
       },
     },
+    emits: ['toggle-theme'],
     setup(props, { emit }) {
       const search = ref('')
-      const cartVisible = ref(false)
+      const shoppingCartVisible = ref(false)
       const favoritesVisible = ref(false)
       const themeLight = ref(!props.isDark)
       const toggleTheme = () => emit('toggle-theme')
@@ -76,7 +74,7 @@
       }
 
       const toggleShoppingCart = () => {
-        cartVisible.value = !cartVisible.value
+        shoppingCartVisible.value = !shoppingCartVisible.value
       }
 
       const goToHome = () => {
@@ -85,7 +83,7 @@
 
       return {
         search,
-        cartVisible,
+        shoppingCartVisible,
         favoritesVisible,
         themeLight,
         toggleTheme,

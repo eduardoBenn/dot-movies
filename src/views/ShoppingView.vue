@@ -82,7 +82,7 @@
       >
         <span class="col-span-2 font-medium">{{ item.title }}</span>
         <span>{{ index + 1 }}</span>
-        <span>R$ {{ item.price }}</span>
+        <span>{{ formatToCurrencyMoney(item.price) }}</span>
         <button>
           <TrashIcon class="h-5 w-5 cursor-pointer text-gray-400 hover:text-red-500" />
         </button>
@@ -90,7 +90,7 @@
 
       <div class="mt-6 flex items-center justify-between">
         <span class="font-medium">Total:</span>
-        <span class="text-xl font-bold">R$ {{ totalPrice }}</span>
+        <span class="text-xl font-bold">{{ formatToCurrencyMoney(totalPrice) }}</span>
       </div>
 
       <button
@@ -106,6 +106,7 @@
 <script lang="ts">
   import { useStore } from '@/store'
   import { validateCEP, validateEmail, validatePhone } from '@/utils/form-validator'
+  import { formatToCurrencyMoney } from '@/utils/formater.util'
   import { TrashIcon } from '@heroicons/vue/16/solid'
   import { InputMask, Message } from 'primevue'
   import { computed, defineComponent, ref } from 'vue'
@@ -166,6 +167,7 @@
         validateFields,
         validateCelular: validatePhone,
         validateCEP,
+        formatToCurrencyMoney,
       }
     },
   })

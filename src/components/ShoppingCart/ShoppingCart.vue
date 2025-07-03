@@ -4,7 +4,7 @@
       <h2 class="text-lg font-semibold">Itens no carrinho</h2>
       <button
         data-testid="clear-items-button"
-        class="text-sm text-blue-500 hover:underline"
+        class="cursor-pointer text-sm text-blue-500 hover:underline"
         @click="clearShoppingItems"
       >
         Esvaziar
@@ -12,6 +12,8 @@
     </header>
 
     <div class="flex-1 overflow-y-auto px-6 py-3">
+      <div v-if="shoppingCartItems.length === 0">Adicione itens ao seu carrinho</div>
+
       <div
         class="mb-4 flex items-center justify-between"
         v-for="(item, index) in shoppingCartItems"
@@ -19,13 +21,11 @@
         data-testid="cart-item"
       >
         <div class="flex items-center space-x-3">
-          <div>
-            <p class="font-small">{{ item.title }}</p>
-            <p class="text-sm text-gray-500">{{ index + 1 }}</p>
-          </div>
+          <p class="text-sm text-gray-500">{{ index + 1 }}</p>
+          <p class="font-small">{{ item.title }}</p>
         </div>
         <div class="flex items-center space-x-2">
-          <span class="font-semibold">R${{ item.price }}</span>
+          <span class="font-semibold">{{ formatToCurrencyMoney(item.price) }}</span>
           <TrashIcon class="w-6 cursor-pointer" @click="removeShoppingItem(item.id)" />
         </div>
       </div>
@@ -34,12 +34,13 @@
     <footer class="border-t px-6 py-4">
       <div class="mb-4 flex items-center justify-between">
         <span>Total:</span>
-        <span class="text-lg font-bold">{{ totalPrice }}</span>
+        <span class="text-lg font-bold">{{ formatToCurrencyMoney(totalPrice) }}</span>
       </div>
       <button
-        class="w-full cursor-pointer rounded-lg bg-green-600 py-3 font-medium text-white transition hover:bg-green-700"
+        class="w-full cursor-pointer rounded-lg bg-green-600 py-3 font-medium text-white transition hover:bg-green-700 disabled:cursor-not-allowed disabled:bg-gray-400"
         v-on:click="goToShopping"
         data-testid="finish-purchase"
+        :disabled="shoppingCartItems.length === 0"
       >
         Finalizar compra
       </button>
@@ -50,6 +51,7 @@
 <script lang="ts">
   import { useStore } from '@/store'
   import { CLEAR_SHOPPING_CART_ITEM, REMOVE_SHOPPING_CART_ITEM } from '@/store/mutationTypes'
+  import { formatToCurrencyMoney } from '@/utils/formater.util'
   import { TrashIcon } from '@heroicons/vue/16/solid'
   import { computed, defineComponent } from 'vue'
   import { useRouter } from 'vue-router'
@@ -62,13 +64,6 @@
     setup() {
       const store = useStore()
       const router = useRouter()
-
-      // const formatValue = (value: number) => {
-      //   return new Intl.NumberFormat('pt-BR', {
-      //     style: 'currency',
-      //     currency: 'BRL',
-      //   }).format(value)
-      // }
 
       const goToShopping = () => {
         router.push('/shopping')
@@ -88,6 +83,7 @@
         goToShopping,
         clearShoppingItems,
         removeShoppingItem,
+        formatToCurrencyMoney,
       }
     },
   })

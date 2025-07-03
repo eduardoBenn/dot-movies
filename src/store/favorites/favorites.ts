@@ -1,5 +1,5 @@
 import type { IFavorite } from '@/interfaces/Ifavorite'
-import { ADD_FAVORITES } from '../mutationTypes'
+import { ADD_FAVORITES, CLEAR_FAVORITES } from '../mutationTypes'
 
 export interface favoriteState {
   favorites: IFavorite[]
@@ -12,6 +12,9 @@ export const favorite = {
   mutations: {
     [ADD_FAVORITES](state, favorite: IFavorite) {
       state.favorites.push(favorite)
+    },
+    [CLEAR_FAVORITES](state) {
+      state.favorites = []
     },
   },
   getters: {
